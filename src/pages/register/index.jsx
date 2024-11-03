@@ -1,4 +1,4 @@
-import { MdEmail, MdLock } from "react-icons/md";
+import { MdEmail, MdLock, MdPreview } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
@@ -10,16 +10,13 @@ import { useForm } from "react-hook-form";
 import {
   Column,
   Container,
-  CriarText,
-  EsqueciText,
-  Row,
   SubtitleLogin,
   Title,
   TitleLogin,
   Wrapper,
 } from "./styles";
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   const {
@@ -49,7 +46,6 @@ const Login = () => {
   };
 
   console.log("errors", errors);
-
   return (
     <>
       <Header />
@@ -62,9 +58,16 @@ const Login = () => {
         </Column>
         <Column>
           <Wrapper>
-            <TitleLogin>Faça seu cadastro</TitleLogin>
-            <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
+            <TitleLogin>Crie seu cadastro</TitleLogin>
+            <SubtitleLogin>Crie sua conta e make the change._</SubtitleLogin>
             <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                placeholder="Nome Completo"
+                leftIcon={<MdPreview />}
+                name="nome completo"
+                control={control}
+              />
+              {errors.nomeCompleto && <span>Nome completo é obrigatório</span>}
               <Input
                 placeholder="E-mail"
                 leftIcon={<MdEmail />}
@@ -80,14 +83,12 @@ const Login = () => {
                 control={control}
               />
               {errors.senha && <span>Senha é obrigatório</span>}
-              <Button title="Entrar" variant="secondary" type="submit" />
+              <Button
+                title="Crie sua conta"
+                variant="secondary"
+                type="submit"
+              />
             </form>
-            <Row>
-              <>
-                <EsqueciText>Esqueci minha senha</EsqueciText>
-                <CriarText href="../register">Criar Conta</CriarText>
-              </>
-            </Row>
           </Wrapper>
         </Column>
       </Container>
@@ -95,4 +96,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export { Register };
